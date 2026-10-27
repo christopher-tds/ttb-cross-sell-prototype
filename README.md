@@ -1,6 +1,6 @@
 # Tie Bar PDP cross-sell prototype
 
-A clickable prototype of the "Looks great with" cross-sell row on a Tie Bar tie page, desktop and mobile.
+A clickable prototype of the "Pairs Well With" cross-sell row on a Tie Bar tie page, desktop and mobile.
 
 **Live:** https://christopher-tds.github.io/ttb-cross-sell-prototype/
 

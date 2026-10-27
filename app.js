@@ -69,7 +69,7 @@
     grid.innerHTML = ids.map((id) => {
       const p = PRODUCTS[id];
       const quick = !p.sheet;
-      const plusLabel = quick ? `Add ${p.name} to bag` : `Choose options for ${p.name}`;
+      const plusLabel = quick ? `Add ${p.name} to cart` : `Choose options for ${p.name}`;
       // Quick-add products link the photo and name to the PDP ("#" in the prototype); shirts open the sheet.
       const opener = (cls, html, extra = "") => quick
         ? `<a href="#" class="${cls}" data-pdp-link ${extra}>${html}</a>`
@@ -112,7 +112,7 @@
     btn.classList.add("is-added");
     // In: instant, so the tap feels confirmed. Out: the check dissolves, then the default dissolves back.
     btn.innerHTML = `<span class="btn-swap">${isPlus ? icon("check") : `${icon("check")} Added`}</span>`;
-    announce(`${PRODUCTS[id].name} added to bag`);
+    announce(`${PRODUCTS[id].name} added to cart`);
     setTimeout(() => {
       const reset = () => { btn.classList.remove("is-added"); btn.innerHTML = before; };
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return reset();
@@ -137,7 +137,7 @@
   let closing = false;
 
   // CTA carries the line total, like the live PDP button ("Add to Cart - $3").
-  const ctaHTML = (total) => `<span>Add to bag</span> <span aria-hidden="true">-</span> <span data-total>${money(Math.round(total * 100) / 100)}</span>`;
+  const ctaHTML = (total) => `<span>Add to cart</span> <span aria-hidden="true">-</span> <span data-total>${money(Math.round(total * 100) / 100)}</span>`;
 
   function sheetHTML(id) {
     const p = PRODUCTS[id];
@@ -184,6 +184,7 @@
 
   function openSheet(id, trigger) {
     returnFocus = trigger;
+    PRODUCTS[id].colors?.forEach((c) => c.src && (new Image().src = c.src)); // preload so swatch swaps are instant
     body.innerHTML = sheetHTML(id);
     fillIcons(body);
     sheet.dataset.id = id;
@@ -214,14 +215,26 @@
   sheet.addEventListener("cancel", (e) => { e.preventDefault(); closeSheet(); }); // Esc
   sheet.addEventListener("click", (e) => { if (e.target.closest("[data-close]")) closeSheet(); });
 
+  // The picked color can carry its own name, photo and price (a sale often covers one color only).
+  function selection() {
+    const p = PRODUCTS[sheet.dataset.id];
+    const picked = body.querySelector('input[name="color"]:checked')?.value;
+    const c = p.colors?.find((x) => x.name === picked) || {};
+    const price = "price" in c ? { price: c.price, compareAt: c.compareAt, percentOff: c.percentOff } : {};
+    return { ...p, ...price, name: c.title || p.name, src: c.src };
+  }
+  const qtyNow = () => Number(body.querySelector(".qty output").textContent);
+  const updateTotal = () => (body.querySelector("[data-total]").textContent = money(Math.round(selection().price * qtyNow() * 100) / 100));
+
   body.addEventListener("change", (e) => {
     if (e.target.name !== "color") return;
     body.querySelector("[data-color-name]").textContent = e.target.value;
-    // Colors with their own photo swap the summary image.
-    const c = PRODUCTS[sheet.dataset.id].colors.find((x) => x.name === e.target.value);
+    const sel = selection();
     const img = body.querySelector(".sum__media img");
-    if (c?.src && img) img.src = c.src;
-    if (c?.title) body.querySelector(".sum__name").textContent = c.title;
+    if (sel.src && img) img.src = sel.src;
+    body.querySelector(".sum__name").textContent = sel.name;
+    body.querySelector(".sum .price").outerHTML = priceHTML(sel, { withOff: true });
+    updateTotal();
   });
 
   body.addEventListener("click", (e) => {
@@ -233,7 +246,7 @@
       const n = Math.max(1, Number(out.textContent) + Number(q.dataset.qty));
       out.textContent = n;
       body.querySelector('[data-qty="-1"]').disabled = n <= 1;
-      body.querySelector("[data-total]").textContent = money(Math.round(PRODUCTS[sheet.dataset.id].price * n * 100) / 100);
+      updateTotal();
       return;
     }
     const add = e.target.closest("[data-add]");
@@ -243,7 +256,7 @@
       add.innerHTML = `<span data-icon="check"></span> Added`;
       fillIcons(add);
       addToBag(qty);
-      announce(`${qty} ${PRODUCTS[sheet.dataset.id].name} added to bag`);
+      announce(`${qty} ${selection().name} added to cart`);
       setTimeout(closeSheet, 700);
     }
   });

@@ -40,8 +40,9 @@ window.TTB_IMAGES = {
    promo    optional promo line under the name ("3 for $160")
    compareAt + percentOff  turn on sale pricing
    colors   swatches; omit for no color picker. A color with `src` and `title` swaps the
-            sheet's summary photo and name when picked. Colors after the first are
-            stand-ins unless they carry their own handle.
+            sheet's summary photo and name when picked, and one with `price` (plus
+            `compareAt`/`percentOff` when on sale) swaps the price. Colors without
+            their own handle noted are stand-ins.
    options  dropdowns; `half: true` pairs two side by side, as in the frames
    sheet    opens the options sheet from the tile (dress shirts and belts). Everything
             else is quick add: the tile button adds the default size and color
@@ -61,10 +62,9 @@ window.TTB_PRODUCTS = {
     name: "Pinpoint Solid - Point Collar White Non-Iron Dress Shirt",
     promo: "3 for $160",
     price: 68,
-    colors: [
-      { name: "White", hex: "#ffffff" },
-      { name: "Light Blue", hex: "#d6e2f3" },
-      { name: "Blue", hex: "#b7c4da" },
+    colors: [ // shr-2955-0003, -0201: the only two live colors
+      { name: "White", hex: "#ffffff", title: "Pinpoint Solid - Point Collar White Non-Iron Dress Shirt", src: cdn("files/PDP_Q424_shr-2955-0003_main_958f2a82-ea5d-43b0-be37-0e9e3fcf8922.jpg?v=1778174899") },
+      { name: "Light Blue", hex: "#d6e2f3", title: "Pinpoint Solid - Point Collar Light Blue Non-Iron Dress Shirt", src: cdn("files/PDP_Q424_shr-2955-0201_main_6d.jpg?v=1776963756") },
     ],
     options: SHIRT_OPTIONS,
   },
@@ -119,10 +119,11 @@ window.TTB_PRODUCTS = {
     price: 45.5,
     compareAt: 65,
     percentOff: 30,
-    colors: [
-      { name: "Light Pink", hex: "#f3d9dc" },
-      { name: "White", hex: "#ffffff" },
-      { name: "Light Blue", hex: "#d6e2f3" },
+    colors: [ // shr-3972-0212, -0003, -0201, -0197: only Light Pink is on sale
+      { name: "Light Pink", hex: "#f3d9dc", price: 45.5, compareAt: 65, percentOff: 30, title: "Textured Solid - Semi Spread Collar Light Pink Non-Iron Dress Shirt", src: cdn("products/SHR-3972-0212_main.jpg?v=1790880577") },
+      { name: "White", hex: "#ffffff", price: 68, title: "Textured Solid - Semi Spread Collar White Non-Iron Dress Shirt", src: cdn("files/PDP_shr-3972-0003_main.jpg?v=1778175109") },
+      { name: "Light Blue", hex: "#d6e2f3", price: 68, title: "Textured Solid - Semi Spread Collar Light Blue Non-Iron Dress Shirt", src: cdn("products/shr-3972-0201_main.jpg?v=1790880986") },
+      { name: "Lavender", hex: "#dcd3ea", price: 68, title: "Textured Solid - Semi Spread Collar Lavender Non-Iron Dress Shirt", src: cdn("files/shr-3972-0197_01.jpg?v=1793133672") },
     ],
     options: [SHIRT_OPTIONS[0], { ...SHIRT_OPTIONS[1], values: [...SHIRT_OPTIONS[1].values, "18.5"] }, SHIRT_OPTIONS[2]],
   },
