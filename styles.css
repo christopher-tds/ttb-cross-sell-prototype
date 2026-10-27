@@ -5,15 +5,16 @@
 
 /* Brand fonts load from ./fonts when present (local only, not published).
    Without them the Roboto fallbacks below take over, same as the live site's CSS. */
-@font-face { font-family: "Poynter Gothic Text"; src: url("fonts/PoynterGothicText.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Poynter Gothic Text"; src: url("fonts/PoynterGothicTextBold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
-@font-face { font-family: "Poynter Gothic Text Condensed"; src: url("fonts/PoynterGothicTextBoldCondensed.woff2") format("woff2"); font-weight: 700; font-display: swap; }
-@font-face { font-family: "Belizio"; src: url("fonts/Belizio-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+/* Private family names, so a missing file falls back to Roboto instead of a copy installed on the viewer's computer */
+@font-face { font-family: "TB Poynter"; src: url("fonts/PoynterGothicText.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "TB Poynter"; src: url("fonts/PoynterGothicTextBold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "TB Poynter Condensed"; src: url("fonts/PoynterGothicTextBoldCondensed.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "TB Belizio"; src: url("fonts/Belizio-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
 
 :root {
-  --font-poynter: "Poynter Gothic Text", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-cond: "Poynter Gothic Text Condensed", "Roboto Condensed", "Arial Narrow", sans-serif;
-  --font-belizio: Belizio, "Roboto Slab", Georgia, serif;
+  --font-poynter: "TB Poynter", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-cond: "TB Poynter Condensed", "Roboto Condensed", "Arial Narrow", sans-serif;
+  --font-belizio: "TB Belizio", "Roboto Slab", Georgia, serif;
 
   /* Hydrogen color tokens */
   --white: #ffffff;
