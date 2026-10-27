@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tie Bar — PDP Cross-Sell Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Roboto family = the live site's CSS fallbacks, used wherever the brand fonts aren't present -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@700&family=Roboto+Slab:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============================ PDP ============================ -->
+<div class="site" id="site">
+  <header class="hdr">
+    <div class="hdr__promo">
+      <button class="hdr__promo-arrow" type="button" aria-label="Previous announcement" data-icon="caret-left"></button>
+      <p>Tie &amp; Pocket Square Sets <a href="#" class="hdr__promo-link">Shop now</a></p>
+      <button class="hdr__promo-arrow" type="button" aria-label="Next announcement" data-icon="caret-right"></button>
+    </div>
+    <div class="hdr__bar">
+      <button class="hdr__icon hdr__menu" type="button" aria-label="Menu" data-icon="list"></button>
+      <a class="hdr__logo" href="#" aria-label="The Tie Bar home"><img src="assets/tie-bar-logo.svg" alt="" width="110" height="42"></a>
+      <nav class="hdr__nav" aria-label="Main">
+        <a href="#">New</a><a href="#">Ties</a><a href="#">Bow ties</a><a href="#">Dress shirts</a><a href="#">Polos &amp; sweaters</a><a href="#">Suits &amp; jackets</a><a href="#">Accessories</a><a href="#">Wedding</a>
+      </nav>
+      <div class="hdr__tools">
+        <a href="#" class="hdr__support">Support</a>
+        <button class="hdr__icon" type="button" aria-label="Search" data-icon="magnifying-glass"></button>
+        <button class="hdr__icon hdr__account" type="button" aria-label="Account" data-icon="user"></button>
+        <button class="hdr__icon hdr__bag" type="button" id="bag-button" aria-label="Bag, 0 items">
+          <span data-icon="handbag"></span>
+          <span class="hdr__bag-count" id="bag-count" hidden>0</span>
+        </button>
+      </div>
+    </div>
+    <nav class="hdr__subnav" aria-label="Categories">
+      <a href="#">New</a><a href="#">Ties</a><a href="#">Bow ties</a><a href="#">Dress shirts</a><a href="#">Polos &amp; sweaters</a><a href="#">Suits &amp; jackets</a>
+    </nav>
+  </header>
+
+  <main class="pdp">
+    <div class="pdp__media">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#">Home</a><span aria-hidden="true">›</span><a href="#">Ties</a></nav>
+      <div class="gallery" aria-label="Product images">
+        <div class="gallery__track">
+          <div class="gallery__item gallery__item--full" data-slot="gallery-1"></div>
+          <div class="gallery__item" data-slot="gallery-2"></div>
+          <div class="gallery__item" data-slot="gallery-3"></div>
+          <div class="gallery__item gallery__item--full" data-slot="gallery-4"></div>
+        </div>
+        <div class="gallery__dots" aria-hidden="true"><i class="is-on"></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+
+    <div class="pdp__buy">
+      <h1 class="pdp__title">Grosgrain Solid Burgundy Tie</h1>
+      <p class="pdp__reviews"><span class="stars" aria-hidden="true"></span><a href="#">550 Reviews</a></p>
+      <p class="pdp__price">$28</p>
+      <p class="pdp__desc">Made from 100% woven silk, our Grosgrain Solid Burgundy tie has subtle texture and sheen for a look that's formal as well as professional.</p>
+
+      <div class="pdp__group">
+        <p class="pdp__label">Color: Burgundy</p>
+        <div class="pdp__swatches" id="pdp-swatches" aria-hidden="true"></div>
+      </div>
+
+      <div class="pdp__group">
+        <div class="pdp__label-row"><p class="pdp__label">Size:</p><a href="#" class="pdp__fit">Fit Guide</a></div>
+        <div class="pdp__sizes">
+          <span>Super Skinny</span><span>Skinny</span><span>Boys</span>
+          <span>Modern</span><span class="is-out">Traditional</span><span>Traditional - XL</span>
+        </div>
+      </div>
+
+      <div class="pdp__group">
+        <p class="pdp__label">Quantity:</p>
+        <div class="pdp__atc">
+          <div class="pdp__qty"><span data-icon="minus"></span><span>1</span><span data-icon="plus"></span></div>
+          <span class="pdp__select">Select size</span>
+        </div>
+      </div>
+
+      <!-- Cross-sell widget: rendered from data.js by app.js -->
+      <section class="xs" id="xs" aria-labelledby="xs-title">
+        <h2 class="xs__title" id="xs-title">Looks great with</h2>
+        <ul class="xs__grid" id="xs-grid" role="list"></ul>
+      </section>
+
+      <p class="pdp__ship">Free shipping with $99 Orders <a href="#">View shipping &amp; returns policy</a></p>
+
+      <section class="notes">
+        <h2 class="notes__title">Stylist Notes</h2>
+        <ul>
+          <li>This solid silk burgundy men's necktie will have you looking sharp for any special occasion.</li>
+          <li>This tie is a Wedding Favorite - Translation: it's the perfect choice for your big day (or just another day at the office). Need help matching your wedding party? It complements Bill Levkoff Wine, Azazie Burgundy and David's Bridal Wine. For more help, chat us or email us at <a href="#">weddings@thetiebar.com</a>.</li>
+          <li>Matching Suits: Charcoal, Black, Navy, Brown</li>
+          <li>Handmade of 100% Woven Silk</li>
+          <li>Fabric Care: Dry-clean Only</li>
+          <li>Imported</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</div>
+
+<!-- ============ Product sheet (mobile) / modal (desktop) ============ -->
+<dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
+  <div class="sheet__scrim" data-close></div>
+  <div class="sheet__panel" tabindex="-1">
+    <div class="sheet__head">
+      <h2 class="sheet__title" id="sheet-title">Looks great with</h2>
+      <button class="sheet__close" type="button" aria-label="Close" data-close data-icon="x"></button>
+    </div>
+    <div class="sheet__body" id="sheet-body"></div>
+  </div>
+</dialog>
+
+<!-- ============ Phone preview (Viewport: Mobile on a wide screen) ============ -->
+<div class="phone-stage" id="phone-stage" hidden>
+  <div class="phone">
+    <iframe id="phone-frame" title="Mobile preview" width="390" height="844"></iframe>
+  </div>
+</div>
+
+<!-- ======================= Prototype controls ======================= -->
+<aside class="ctl" id="ctl" aria-label="Prototype controls">
+  <button class="ctl__toggle" type="button" id="ctl-toggle" aria-expanded="true" aria-controls="ctl-body">
+    Prototype controls <span data-icon="caret-down"></span>
+  </button>
+  <div class="ctl__body" id="ctl-body">
+    <fieldset class="ctl__row"><legend>Style</legend>
+      <div class="ctl__seg" data-key="style">
+        <button type="button" data-value="current">Current</button><button type="button" data-value="sleek">Sleek</button>
+      </div>
+    </fieldset>
+    <fieldset class="ctl__row"><legend>Layout</legend>
+      <div class="ctl__seg" data-key="layout">
+        <button type="button" data-value="3col">3-column</button><button type="button" data-value="2x2">2x2</button>
+      </div>
+    </fieldset>
+    <fieldset class="ctl__row"><legend>Product mix</legend>
+      <div class="ctl__seg" data-key="mix">
+        <button type="button" data-value="tie">Tie page</button><button type="button" data-value="mixed">Mixed</button><button type="button" data-value="all">All types</button>
+      </div>
+    </fieldset>
+    <fieldset class="ctl__row ctl__row--view"><legend>Viewport</legend>
+      <div class="ctl__seg" data-key="view">
+        <button type="button" data-value="desktop">Desktop</button><button type="button" data-value="mobile">Mobile</button>
+      </div>
+    </fieldset>
+  </div>
+</aside>
+
+<script src="icons.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
