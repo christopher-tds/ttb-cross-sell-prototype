@@ -49,9 +49,9 @@ window.TTB_IMAGES = {
             straight to the bag, and the photo and name link to the PDP.
    --------------------------------------------------------------------------- */
 const SHIRT_OPTIONS = [
-  { label: "Fit", half: true, values: ["Standard", "Trim"], value: "Standard" },
-  { label: "Necksize", half: true, values: ["14.5", "15", "15.5", "16", "16.5", "17", "17.5", "18"], value: "15.5" },
-  { label: "Sleeve Length", values: ["32/33", "34/35", "36/37"], value: "34/35" },
+  { label: "Fit", half: true, values: ["Standard", "Trim"] },
+  { label: "Necksize", half: true, values: ["14.5", "15", "15.5", "16", "16.5", "17", "17.5", "18"] },
+  { label: "Sleeve Length", values: ["32/33", "34/35", "36/37"] },
 ];
 const TOP_SIZES = ["XS", "S", "M", "L", "XL"];
 
@@ -103,14 +103,14 @@ window.TTB_PRODUCTS = {
       { name: "Navy", hex: "#1f2a44" },
       { name: "White", hex: "#ffffff" },
     ],
-    options: [{ label: "Size", values: TOP_SIZES, value: "M" }],
+    options: [{ label: "Size", values: TOP_SIZES }],
   },
   "belt": { // blt-5572-0079
     type: "Belt",
     sheet: true, // short size sheet, per the Asana test plan
     name: "Classic Leather Chocolate Brown Belt",
     price: 38,
-    options: [{ label: "Size", values: ["Small", "Medium", "Large"], value: "Medium" }],
+    options: [{ label: "Size", values: ["Small", "Medium", "Large"] }],
   },
   "sale-shirt": { // shr-3972-0212, on sale on the live site
     type: "Dress shirt",
@@ -131,7 +131,7 @@ window.TTB_PRODUCTS = {
     type: "Shoelaces",
     name: "Brown Colored Shoelaces",
     price: 3,
-    options: [{ label: "Size", values: ["One pair - 30 in.", "One pair - 36 in."], value: "One pair - 30 in." }],
+    options: [{ label: "Size", values: ["One pair - 30 in.", "One pair - 36 in."] }],
   },
   "sweater": { // swt-6169-0592
     type: "Sweater",
@@ -142,7 +142,7 @@ window.TTB_PRODUCTS = {
       { name: "Oatmeal", hex: "#d8cbb3" },
       { name: "Charcoal", hex: "#3c3d3f" },
     ],
-    options: [{ label: "Size", values: TOP_SIZES, value: "M" }],
+    options: [{ label: "Size", values: TOP_SIZES }],
   },
   "jacket": { // jck-5788-0606
     type: "Jacket",
@@ -154,8 +154,8 @@ window.TTB_PRODUCTS = {
       { name: "Olive", hex: "#5b5e3c" },
     ],
     options: [
-      { label: "Fit", half: true, values: ["Regular", "Long"], value: "Regular" },
-      { label: "Size", half: true, values: ["36", "38", "40", "42", "44", "46"], value: "40" },
+      { label: "Fit", half: true, values: ["Regular", "Long"] },
+      { label: "Size", half: true, values: ["36", "38", "40", "42", "44", "46"] },
     ],
   },
   "pants": { // pnt-5516-0251
@@ -168,8 +168,8 @@ window.TTB_PRODUCTS = {
       { name: "Gray", hex: "#8a8d90" },
     ],
     options: [
-      { label: "Waist Size", half: true, values: ["28", "30", "31", "32", "33", "34", "36", "38"], value: "31" },
-      { label: "Inseam Length", half: true, values: ["30", "32", "34"], value: "32" },
+      { label: "Waist Size", half: true, values: ["28", "30", "31", "32", "33", "34", "36", "38"] },
+      { label: "Inseam Length", half: true, values: ["30", "32", "34"] },
     ],
   },
 };

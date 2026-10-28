@@ -9,7 +9,7 @@
   const isEmbed = new URLSearchParams(location.search).has("embed");
   if (isEmbed) document.documentElement.classList.add("is-embed");
 
-  const DEFAULTS = { style: "current", layout: "3col", mix: "tie", view: "desktop" };
+  const DEFAULTS = { style: "sleek", layout: "3col", mix: "tie", view: "desktop" };
   const ALLOWED = {
     style: ["current", "sleek"],
     layout: ["3col", "2x2"],
@@ -165,8 +165,8 @@
         const fid = `opt-${i}`;
         return `<div class="fld${o.half ? " fld--half" : ""}">
           <label class="fld__label" for="${fid}">${esc(o.label)}</label>
-          <div class="select"><select id="${fid}" name="${esc(o.label)}">${o.values.map((v) =>
-            `<option${v === o.value ? " selected" : ""}>${esc(v)}</option>`).join("")}</select><span data-icon="caret-down"></span></div>
+          <div class="select"><select id="${fid}" name="${esc(o.label)}" required><option value="" selected disabled>Select</option>${o.values.map((v) =>
+            `<option>${esc(v)}</option>`).join("")}</select><span data-icon="caret-down"></span></div>
         </div>`;
       }).join("") + `</div>`;
     }
@@ -177,7 +177,7 @@
         <output aria-live="polite" aria-label="Quantity">1</output>
         <button type="button" data-qty="1" aria-label="Increase quantity">${icon("plus")}</button>
       </div>
-      <button type="button" class="btn-primary" data-add>${ctaHTML(p.price)}</button>
+      ${p.options ? `<button type="button" class="btn-primary" data-add disabled><span>Select size</span></button>` : `<button type="button" class="btn-primary" data-add>${ctaHTML(p.price)}</button>`}
     </div>`;
     return h;
   }
@@ -224,9 +224,17 @@
     return { ...p, ...price, name: c.title || p.name, src: c.src };
   }
   const qtyNow = () => Number(body.querySelector(".qty output").textContent);
-  const updateTotal = () => (body.querySelector("[data-total]").textContent = money(Math.round(selection().price * qtyNow() * 100) / 100));
+  // Like the PDP: options start unpicked, and the CTA reads "Select size" until every one is picked.
+  function updateTotal() {
+    const add = body.querySelector("[data-add]");
+    if (add.classList.contains("is-added")) return;
+    const ready = [...body.querySelectorAll(".opts select")].every((s) => s.value);
+    add.disabled = !ready;
+    add.innerHTML = ready ? ctaHTML(selection().price * qtyNow()) : "<span>Select size</span>";
+  }
 
   body.addEventListener("change", (e) => {
+    if (e.target.closest(".opts")) return updateTotal();
     if (e.target.name !== "color") return;
     body.querySelector("[data-color-name]").textContent = e.target.value;
     const sel = selection();
@@ -250,7 +258,7 @@
       return;
     }
     const add = e.target.closest("[data-add]");
-    if (add && !add.classList.contains("is-added")) {
+    if (add && !add.disabled && !add.classList.contains("is-added")) {
       const qty = Number(body.querySelector(".qty output").textContent);
       add.classList.add("is-added");
       add.innerHTML = `<span data-icon="check"></span> Added`;
